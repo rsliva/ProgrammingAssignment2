@@ -1,8 +1,9 @@
-## Put comments here that give an overall description of what your
-## functions do
+# cachematrix.R 
+# Contains two functions used to invert a matix, and to cache the inverse of the matrix for later use.
 
-## Write a short comment describing this function
-
+# makeCacheMatrix: creates a matrix object that holds a cached version of it's inverse
+#                  and includes helper methods to get and set both the matrix and matrix inverse.
+# x: the matrix to be inverted
 makeCacheMatrix <- function(x = matrix()) {
     m <- NULL
     set <- function(y) {
@@ -18,10 +19,14 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
-
+# cacheSolve: function to use solve() function to get the inverse of a matrix. If a cached version
+#             of the inverse already exists in the object then that is returned instead.
+#             Some basic error handling is used if the matrix is not invertible.
+#   x: matrix object with matrix to be inverted. The matrix object is created
+#      with builtin caching support by using the makeCacheMatix function above.
+# ...: additional paramters to be passed to the solve() function.
 cacheSolve <- function(x, ...) {
-    ## Return a matrix that is the inverse of 'x'
+    # Return a matrix that is the inverse of 'x'
     m <- x$getinverse()
     if(!is.null(m)) {
         # found cached inverted matrix - use it
